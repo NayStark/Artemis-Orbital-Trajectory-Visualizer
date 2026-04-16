@@ -6,6 +6,7 @@
 ![PyVista](https://img.shields.io/badge/PyVista-3D%20Rendering-2E8B57)
 ![VTK](https://img.shields.io/badge/VTK-Visualization-FF6F00)
 ![Astrodynamics](https://img.shields.io/badge/Domain-Orbital%20Mechanics-orange)
+![Status](https://img.shields.io/badge/Status-Completed-success)
 
 The system converts raw Earth-Centered Inertial (ECI) state vectors into synchronized 3D scene updates. The architecture focuses on consistent frame-based rendering of ephemeris-derived orbital trajectories.
 
