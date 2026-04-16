@@ -10,10 +10,12 @@
 ![NumPy](https://img.shields.io/badge/NumPy-Numerical_Computing-013243?logo=numpy)
 ![Pandas](https://img.shields.io/badge/Pandas-Data_Processing-150458?logo=pandas)
 
-![Method-ECI Ephemeris Rendering](https://img.shields.io/badge/Method-Ephemeris_Based_Rendering-critical)
+![Method-Ephemeris Rendering](https://img.shields.io/badge/Method-Ephemeris_Based_Rendering-critical)
 ![Physics-Orbital Mechanics](https://img.shields.io/badge/Physics-Cislunar_Trajectory-black)
 
-![Simulation](https://img.shields.io/badge/Type-3D_Space_Simulation-success)
+![Type-Spacecraft Mission Visualization](https://img.shields.io/badge/Type-Spacecraft_Mission_Visualization-success)
+![Result-Artemis Trajectory Visualization](https://img.shields.io/badge/Result-Mission_Visualization-brightgreen)
+
 ![Status](https://img.shields.io/badge/Status-Completed-success)
 
 </p>
