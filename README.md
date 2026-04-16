@@ -1,12 +1,22 @@
 # Artemis Orbital Trajectory Visualizer
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
-![NumPy](https://img.shields.io/badge/NumPy-Numerical%20Computing-013243)
-![Pandas](https://img.shields.io/badge/Pandas-Data%20Processing-150458)
-![PyVista](https://img.shields.io/badge/PyVista-3D%20Rendering-2E8B57)
-![VTK](https://img.shields.io/badge/VTK-Visualization-FF6F00)
-![Astrodynamics](https://img.shields.io/badge/Domain-Orbital%20Mechanics-orange)
+<p align="center">
+
+![GNC](https://img.shields.io/badge/Domain-Guidance_Navigation_Control-red)
+![System-Mission Visualization](https://img.shields.io/badge/System-Mission_Trajectory_Visualization-blueviolet)
+
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)
+![PyVista](https://img.shields.io/badge/Rendering-PyVista-2A9D8F)
+![NumPy](https://img.shields.io/badge/NumPy-Numerical_Computing-013243?logo=numpy)
+![Pandas](https://img.shields.io/badge/Pandas-Data_Processing-150458?logo=pandas)
+
+![Method-ECI Ephemeris Rendering](https://img.shields.io/badge/Method-Ephemeris_Based_Rendering-critical)
+![Physics-Orbital Mechanics](https://img.shields.io/badge/Physics-Cislunar_Trajectory-black)
+
+![Simulation](https://img.shields.io/badge/Type-3D_Space_Simulation-success)
 ![Status](https://img.shields.io/badge/Status-Completed-success)
+
+</p>
 
 The system converts raw Earth-Centered Inertial (ECI) state vectors into synchronized 3D scene updates. The architecture focuses on consistent frame-based rendering of ephemeris-derived orbital trajectories.
 
