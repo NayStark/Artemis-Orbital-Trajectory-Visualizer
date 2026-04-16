@@ -73,20 +73,49 @@ The visualization pipeline operates as follows:
 
 ## Mathematical Model
 
-The spacecraft orientation is defined using:
+The visualization represents spacecraft motion in an Earth-centered inertial (ECI) frame using ephemeris-derived state vectors.
 
-- Forward axis:  
-  aligned with velocity vector  
-  \[
-  \hat{v} = \frac{v}{||v||}
-  \]
+The spacecraft orientation is defined using a velocity-aligned kinematic model, while position is taken directly from NASA JPL Horizons data.
 
-- Rotation matrix:  
-  constructed via axis-angle (Rodrigues’ formula)
+### Velocity-aligned attitude
 
-- Full transformation:
-  homogeneous matrix in SE(3):
-  position + rotation + visualization scale
+The spacecraft forward direction is aligned with its instantaneous velocity vector:
+
+$$
+\hat{\mathbf{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|}
+$$
+
+where:
+- $\mathbf{v}$ is the inertial velocity vector
+- $\hat{\mathbf{v}}$ defines the prograde (forward) direction
+
+
+### Attitude construction
+
+A body-fixed frame is constructed by aligning the spacecraft forward axis with $\hat{\mathbf{v}}$ using a standard axis-angle rotation (Rodrigues’ formula):
+
+$$
+\mathbf{R} = \mathbf{I} + \sin\theta [\mathbf{K}] + (1 - \cos\theta)[\mathbf{K}]^2
+$$
+
+where:
+- $\theta$ is the angle between the reference forward axis and $\hat{\mathbf{v}}$
+- $[\mathbf{K}]$ is the skew-symmetric matrix of the rotation axis
+
+### Position and scaling (visualization only)
+
+The spacecraft position is taken directly from ephemeris data in ECI coordinates. A uniform scaling factor is applied for visualization purposes to improve numerical display at interplanetary distances.
+
+---
+
+### Notes
+
+This model is kinematic and used strictly for visualization. It preserves:
+- Ephemeris-based trajectory fidelity
+- Velocity-aligned spacecraft orientation
+- Frame-consistent inertial rendering
+
+It does not include spacecraft dynamics, control laws, or numerical propagation.
 
 ---
 
