@@ -1,33 +1,140 @@
 # Artemis Orbital Trajectory Visualizer
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
-![GNC](https://img.shields.io/badge/Domain-GNC%20%7C%20Astrodynamics-orange)
-![Visualization](https://img.shields.io/badge/Rendering-3D%20Physics--Based-green)
-![Status](https://img.shields.io/badge/Status-Active%20Development-brightgreen)
+![NumPy](https://img.shields.io/badge/NumPy-Numerical%20Computing-013243)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Processing-150458)
+![PyVista](https://img.shields.io/badge/PyVista-3D%20Rendering-2E8B57)
+![VTK](https://img.shields.io/badge/VTK-Visualization-FF6F00)
+![Astrodynamics](https://img.shields.io/badge/Domain-Orbital%20Mechanics-orange)
 
-A high-fidelity **Guidance, Navigation, and Control (GNC) visualization tool** for rendering and analyzing spacecraft orbital trajectories in Earth–Moon space. The project transforms ephemeris-based state vectors into physically consistent 3D motion for engineering review, mission analysis, and trajectory inspection.
-
----
-
-## Mission Context
-
-This tool supports visualization of multi-body orbital dynamics, including:
-
-- Translunar injection and lunar flybys  
-- Earth–Moon trajectory propagation  
-- Spacecraft state evolution in inertial space  
-
-It prioritizes **numerical consistency, frame fidelity, and real-time rendering performance** over purely aesthetic visualization.
-
----
+The system converts raw Earth-Centered Inertial (ECI) state vectors into synchronized 3D scene updates. The architecture focuses on consistent frame-based rendering of ephemeris-derived orbital trajectories.
 
 ## Preview
 
-> ![Trajectory Animation](output/artemis_trajectory.gif)
+![Artemis Orbit Simulation](output/artemis_trajectory.gif)
 
+## System Overview
+
+This tool visualizes spacecraft motion using precomputed ephemeris state vectors, converting them into a dynamic 3D scene with consistent inertial-frame representation.
+
+The spacecraft attitude is approximated using a **velocity-aligned (prograde) kinematic model**, providing physically intuitive orientation during orbital motion.
+
+---
+
+## Features
+
+### Real-Time Trajectory Playback
+Incremental rendering of spacecraft motion using ephemeris-derived state vectors, enabling smooth playback of orbital trajectories.
+
+### Velocity-Aligned Spacecraft Orientation
+Spacecraft attitude is computed by aligning its forward axis with the instantaneous velocity vector (prograde direction), providing intuitive motion visualization.
+
+### Earth–Moon System Visualization
+Scaled rendering of the Earth–Moon system provides spatial context for trajectory analysis in an inertial reference frame.
+
+### GIF Export
+Frame-by-frame export of trajectory simulations for reporting, documentation, and analysis.
+
+### Modular Architecture
+Trajectory datasets and visualization components are structured for easy swapping between different mission scenarios or ephemeris inputs.
+
+---
+
+## Data Sources
+
+- **Ephemeris Data:** NASA JPL Horizons System  
+  https://ssd.jpl.nasa.gov/horizons/
+
+- **Spacecraft Geometry:** Orion CAD model from NASA 3D Resources  
+  https://nasa3d.arc.nasa.gov/
+
+---
+
+## Technical Implementation
+
+The visualization pipeline operates as follows:
+
+1. Load ephemeris-derived ECI state vectors
+2. Scale physical positions for visualization
+3. Construct spacecraft attitude using velocity vector alignment
+4. Apply SE(3) transformation per timestep
+5. Render incremental trajectory updates in PyVista
+
+---
+
+## Core Stack
+
+- **Visualization Engine:** PyVista (VTK-based rendering)
+- **Geometry Processing:** trimesh (CAD mesh conversion)
+- **Numerical Processing:** NumPy, Pandas
+- **Custom Utilities:** Rigid-body transformation tools (SE(3)) and velocity-aligned kinematic attitude model
+
+---
+
+## Mathematical Model
+
+The spacecraft orientation is defined using:
+
+- Forward axis:  
+  aligned with velocity vector  
+  \[
+  \hat{v} = \frac{v}{||v||}
+  \]
+
+- Rotation matrix:  
+  constructed via axis-angle (Rodrigues’ formula)
+
+- Full transformation:
+  homogeneous matrix in SE(3):
+  position + rotation + visualization scale
+
+---
+
+## Usage
+
+### 1. Prepare Data
+
+Place ephemeris files in `data/`:
+
+- `artemis.csv`
+- `moon.csv`
+
+Format:
 ```text
-[ Artemis II Trajectory Visualization ]
-Earth–Moon system with spacecraft trajectory overlay
-- Real-time propagated orbit
-- Scaled celestial bodies
-- Orion CAD model integration
+JDTDB, x, y, z, vx, vy, vz
+```
+
+Where
+
+- **JDTDB** = Julian Date (TDB)  
+- **x, y, z** = ECI position (meters after conversion)  
+- **vx, vy, vz** = ECI velocity (m/s)  
+
+---
+
+## 2. Run Simulation
+
+```bash
+python main.py
+```
+
+## Repository Structure
+```text
+Artemis-Orbital-Trajectory-Visualizer/
+├── data/
+│   ├── artemis.csv
+│   └── moon.csv
+├── models/
+│   ├── orion.obj
+│   └── orion_clean.obj
+├── output/
+│   └── artemis_trajectory.gif
+├── src/
+│   ├── data_io.py
+│   ├── export.py
+│   ├── gnc.py
+│   ├── main.py
+│   ├── render_config.py
+│   └── viz.py
+└── README.md
+```
